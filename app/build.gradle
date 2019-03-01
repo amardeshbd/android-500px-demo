@@ -55,6 +55,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation "androidx.recyclerview:recyclerview:$rootProject.androidxRecyclerViewVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.androidxLifecycleVersion"
+    implementation "android.arch.lifecycle:reactivestreams:1.1.1"
 
     // RxJava
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxJavaVersion"
