@@ -25,6 +25,12 @@ android {
 
         }
     }
+
+    dataBinding {
+        // Use DataBinding for MVVM
+        // https://developer.android.com/topic/libraries/data-binding/start.html
+        enabled = true
+    }
 }
 
 def getLocalProperty(propertyKey) {
@@ -47,6 +53,8 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$rootProject.androidxVersion"
     implementation "androidx.core:core-ktx:$rootProject.androidxCoreVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.androidxRecyclerViewVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.androidxLifecycleVersion"
 
     // RxJava
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxJavaVersion"

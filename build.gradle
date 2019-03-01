@@ -42,6 +42,8 @@ ext {
     // https://developer.android.com/jetpack/androidx/migrate
     androidxVersion = '1.0.2'
     androidxCoreVersion = '1.0.1'
+    androidxRecyclerViewVersion = '1.0.0'
+    androidxLifecycleVersion = '2.0.0'
     // https://developer.android.com/reference/android/support/constraint/ConstraintLayout
     constraintLayoutVersion = '1.1.3'
 
