@@ -26,3 +26,30 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+
+
+// Define versions in a single place
+ext {
+    // Sdk and tools
+    // --------------------------------------------------
+    androidMinSdkVersion = 19 // KitKat 4.4
+    androidTargetSdkVersion = 28 // Pie
+    androidCompileSdkVersion = 28 // https://source.android.com/setup/start/build-numbers
+
+    // Google Products & Support library dependencies
+    // --------------------------------------------------
+    // https://developer.android.com/jetpack/androidx/migrate
+    androidxVersion = '1.0.2'
+    androidxCoreVersion = '1.0.1'
+    // https://developer.android.com/reference/android/support/constraint/ConstraintLayout
+    constraintLayoutVersion = '1.1.3'
+
+    // 3rd party library dependencies
+    // --------------------------------------------------
+    timberLibraryVersion = '4.7.0' // https://github.com/JakeWharton/timber
+    rxJavaVersion = '2.2.7' // https://github.com/ReactiveX/RxJava/releases
+    rxAndroidVersion = '2.1.1' // https://github.com/ReactiveX/RxAndroid/releases
+    retrofitVersion = '2.5.0' // https://square.github.io/retrofit/
+    gsonVersion = '2.8.5' // https://github.com/google/gson
+}
