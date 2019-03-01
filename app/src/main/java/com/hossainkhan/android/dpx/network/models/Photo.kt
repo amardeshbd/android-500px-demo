@@ -41,6 +41,6 @@ data class Photo(
     var imageUrls: List<String>,
     var user: User
 ) {
-    val imageUrl: String?
-        get() = imageUrls.firstOrNull()
+    val imageUrl: String
+        get() = imageUrls.firstOrNull() ?: ""
 }

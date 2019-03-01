@@ -61,5 +61,6 @@ data class Photos(
 ) {
     companion object {
         const val FEATURE_POPULAR = "popular"
+        const val IMAGE_SIZE_600 = 600
     }
 }

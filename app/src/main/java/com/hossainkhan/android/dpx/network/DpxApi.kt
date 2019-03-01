@@ -18,7 +18,8 @@ interface DpxApi {
      */
     @GET("/v1/photos")
     fun photos(
+        @Query("consumer_key") key: String,
         @Query("feature") feature: String,
-        @Query("consumer_key") key: String
+        @Query("image_size") imageSize: Int
     ): Single<Photos>
 }

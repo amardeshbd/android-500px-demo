@@ -17,14 +17,14 @@ class PhotoBrowserViewModel(private val api: DpxApi) : ViewModel() {
     val photos: LiveData<List<String>>
         get() {
             return LiveDataReactiveStreams.fromPublisher(
-                api.photos(Photos.FEATURE_POPULAR, BuildConfig.API_KEY)
+                api.photos(BuildConfig.API_KEY, Photos.FEATURE_POPULAR, Photos.IMAGE_SIZE_600)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnSubscribe { isNetworkRequestInProgress.set(true) }
                     .doOnSuccess { isNetworkRequestInProgress.set(false) }
                     .doOnError { isNetworkRequestInProgress.set(false) }
                     .map { photos ->
-                        photos.photos.map { it.name }
+                        photos.photos.map { it.imageUrl }
                     }.toFlowable()
             )
         }
