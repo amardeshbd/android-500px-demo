@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">500px Gallery</string>
+    <string name="title_activity_photo_details">Photo Details</string>
 </resources>

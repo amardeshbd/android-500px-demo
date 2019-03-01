@@ -11,7 +11,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
-class PhotoBrowserViewModel(private val api: DpxApi) : ViewModel() {
+class PhotoBrowserViewModel(private val api: DpxApi,
+                            private val navigator: PhotoBrowserNavigator) : ViewModel() {
     // TODO - data binding not working with observable field.
     val isNetworkRequestInProgress = ObservableField(false)
 
@@ -33,5 +34,6 @@ class PhotoBrowserViewModel(private val api: DpxApi) : ViewModel() {
 
     fun onPhotoSelected(item: String) {
         Timber.d("Selected photo with URL: $item")
+        navigator.openPhotoDetailsView(item.hashCode().toLong())
     }
 }
