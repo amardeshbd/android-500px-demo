@@ -6,25 +6,26 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hossainkhan.android.dpx.Injection
 import com.hossainkhan.android.dpx.R
 import com.hossainkhan.android.dpx.base.ViewModelFactory
-import com.hossainkhan.android.dpx.databinding.ActivityMainBinding
+import com.hossainkhan.android.dpx.databinding.ActivityPhotoBrowserBinding
 import com.hossainkhan.android.dpx.extensions.onChanged
+import com.hossainkhan.android.dpx.ui.GridSpacingItemDecoration
 import timber.log.Timber
 
-class MainActivity : AppCompatActivity() {
+class PhotoBrowser : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityPhotoBrowserBinding
     private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: PhotoBrowserViewModel
-    private lateinit var adapter: SimpleItemRecyclerViewAdapter
+    private lateinit var adapter: PhotoItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_photo_browser)
         binding.lifecycleOwner = this
 
         viewModelFactory = Injection.provideViewModelFactory(this)
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.isNetworkRequestInProgress.onChanged {
             // TODO - move this to data binding
             Timber.d("Is in progress: $it")
-            binding.progressBar.visibility = if(it) View.VISIBLE else View.GONE
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         }
     }
 
@@ -49,8 +50,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        adapter = SimpleItemRecyclerViewAdapter()
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = PhotoItemAdapter()
+        val spanSize = resources.getInteger(R.integer.grid_column_count)
+        recyclerView.layoutManager = GridLayoutManager(this, spanSize)
+        recyclerView.addItemDecoration(
+            GridSpacingItemDecoration(
+                spanSize,
+                resources.getDimension(R.dimen.grid_item_spacing).toInt(),
+                true
+            )
+        )
         recyclerView.adapter = adapter
     }
 }

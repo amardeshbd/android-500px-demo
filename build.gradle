@@ -54,4 +54,5 @@ ext {
     rxAndroidVersion = '2.1.1' // https://github.com/ReactiveX/RxAndroid/releases
     retrofitVersion = '2.5.0' // https://square.github.io/retrofit/
     gsonVersion = '2.8.5' // https://github.com/google/gson
+    picassoVersion = '2.71828' // https://github.com/square/picasso
 }

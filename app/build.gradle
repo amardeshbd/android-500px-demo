@@ -75,6 +75,9 @@ dependencies {
     // Timber for Logging
     implementation "com.jakewharton.timber:timber:$rootProject.timberLibraryVersion"
 
+    // Picasso
+    implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
+
 
     // Testing related libs
     // --------------------------------
