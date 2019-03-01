@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.ViewModel
 import com.hossainkhan.android.dpx.BuildConfig
 import com.hossainkhan.android.dpx.network.DpxApi
+import com.hossainkhan.android.dpx.network.models.Photo
 import com.hossainkhan.android.dpx.network.models.Photos
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -16,7 +17,7 @@ class PhotoBrowserViewModel(private val api: DpxApi,
     // TODO - data binding not working with observable field.
     val isNetworkRequestInProgress = ObservableField(false)
 
-    val photos: LiveData<List<String>>
+    val photos: LiveData<List<Photo>>
         get() {
             return LiveDataReactiveStreams.fromPublisher(
                 api.photos(BuildConfig.API_KEY, Photos.FEATURE_POPULAR, Photos.IMAGE_SIZE_600)
@@ -26,14 +27,14 @@ class PhotoBrowserViewModel(private val api: DpxApi,
                     .doOnSuccess { isNetworkRequestInProgress.set(false) }
                     .doOnError { isNetworkRequestInProgress.set(false) }
                     .map { photos ->
-                        photos.photos.map { it.imageUrl }
+                        photos.photos
                     }.toFlowable()
             )
         }
 
 
-    fun onPhotoSelected(item: String) {
-        Timber.d("Selected photo with URL: $item")
-        navigator.openPhotoDetailsView(item.hashCode().toLong())
+    fun onPhotoSelected(photo: Photo) {
+        Timber.d("Selected photo with URL: ${photo.imageUrl}")
+        navigator.openPhotoDetailsView(photo)
     }
 }

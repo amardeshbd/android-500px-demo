@@ -13,6 +13,7 @@ import com.hossainkhan.android.dpx.R
 import com.hossainkhan.android.dpx.base.ViewModelFactory
 import com.hossainkhan.android.dpx.databinding.ActivityPhotoBrowserBinding
 import com.hossainkhan.android.dpx.extensions.onChanged
+import com.hossainkhan.android.dpx.network.models.Photo
 import com.hossainkhan.android.dpx.photodetails.PhotoDetailsActivity
 import com.hossainkhan.android.dpx.ui.GridSpacingItemDecoration
 import timber.log.Timber
@@ -65,7 +66,7 @@ class PhotoBrowserActivity : AppCompatActivity(), PhotoBrowserNavigator {
     }
 
 
-    override fun openPhotoDetailsView(photoId: Long) {
-        startActivity(PhotoDetailsActivity.createStartIntent(this, photoId))
+    override fun openPhotoDetailsView(photo: Photo) {
+        startActivity(PhotoDetailsActivity.createStartIntent(this, photo))
     }
 }

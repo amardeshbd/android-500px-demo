@@ -4,15 +4,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.hossainkhan.android.dpx.databinding.ItemListPhotoBinding
+import com.hossainkhan.android.dpx.network.models.Photo
 import com.squareup.picasso.Picasso
 
 class PhotoItemAdapter(
     private val viewModel: PhotoBrowserViewModel
 ) :
     RecyclerView.Adapter<PhotoItemAdapter.ViewHolder>() {
-    private val values: MutableList<String> = mutableListOf()
+    private val values: MutableList<Photo> = mutableListOf()
 
-    fun updateData(data: List<String>) {
+    fun updateData(data: List<Photo>) {
         values.clear()
         values.addAll(data)
         notifyDataSetChanged()
@@ -25,7 +26,7 @@ class PhotoItemAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        Picasso.get().load(item).into(holder.contentView)
+        Picasso.get().load(item.imageUrl).into(holder.contentView)
     }
 
     override fun getItemCount() = values.size

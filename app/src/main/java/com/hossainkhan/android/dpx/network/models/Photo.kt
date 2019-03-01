@@ -1,6 +1,8 @@
 package com.hossainkhan.android.dpx.network.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 /**
  * Model class representing a photo object
@@ -34,13 +36,14 @@ import com.google.gson.annotations.SerializedName
  *       }
  *  }
  */
+@Parcelize
 data class Photo(
     var id: Long,
     var name: String,
     @SerializedName("image_url")
     var imageUrls: List<String>,
     var user: User
-) {
+) : Parcelable {
     val imageUrl: String
         get() = imageUrls.firstOrNull() ?: ""
 }
