@@ -13,18 +13,35 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+
+        buildConfigField "String", "API_KEY", "\"" + getLocalProperty("API_KEY") + "\""
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+
         }
     }
 }
 
+def getLocalProperty(propertyKey) {
+    // Creates a variable called localPropertiesFile, and initializes it to the local.properties file.
+    def localPropertiesFile = rootProject.file("local.properties")
+
+    // Loads the local.properties file into the properties object.
+    def properties = new Properties()
+    properties.load(new FileInputStream(localPropertiesFile))
+
+    return properties[propertyKey]
+}
+
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // AndroidX Libs
     implementation "androidx.appcompat:appcompat:$rootProject.androidxVersion"
@@ -38,9 +55,13 @@ dependencies {
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
 
     // Gson for JSON
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
+
+    // Timber for Logging
+    implementation "com.jakewharton.timber:timber:$rootProject.timberLibraryVersion"
 
 
     // Testing related libs
