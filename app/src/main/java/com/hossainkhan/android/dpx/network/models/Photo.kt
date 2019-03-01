@@ -1,5 +1,7 @@
 package com.hossainkhan.android.dpx.network.models
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Model class representing a photo object
  *
@@ -34,5 +36,10 @@ package com.hossainkhan.android.dpx.network.models
  */
 data class Photo(
     var id: Long,
-    var name: String
-)
+    var name: String,
+    @SerializedName("image_url")
+    var imageUrls: List<String>
+) {
+    val imageUrl: String?
+        get() = imageUrls.firstOrNull()
+}

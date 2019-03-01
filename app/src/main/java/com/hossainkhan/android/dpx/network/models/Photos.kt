@@ -58,4 +58,8 @@ data class Photos(
     @SerializedName("total_pages")
     var totalPages: Int,
     var photos: List<Photo> = listOf()
-)
+) {
+    companion object {
+        const val FEATURE_POPULAR = "popular"
+    }
+}

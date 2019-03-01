@@ -5,6 +5,11 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+/**
+ * APIs for 500px (Dpx).
+ *
+ * See https://github.com/500px/legacy-api-documentation/tree/master/endpoints
+ */
 interface DpxApi {
     /**
      * https://github.com/500px/legacy-api-documentation/blob/master/endpoints/photo/GET_photos.md
