@@ -13,6 +13,7 @@ import com.hossainkhan.android.dpx.R
 import com.hossainkhan.android.dpx.base.ViewModelFactory
 import com.hossainkhan.android.dpx.databinding.ActivityPhotoBrowserBinding
 import com.hossainkhan.android.dpx.extensions.onChanged
+import com.hossainkhan.android.dpx.ui.GridSpacingItemDecoration
 import timber.log.Timber
 
 class PhotoBrowser : AppCompatActivity() {
@@ -37,7 +38,7 @@ class PhotoBrowser : AppCompatActivity() {
         viewModel.isNetworkRequestInProgress.onChanged {
             // TODO - move this to data binding
             Timber.d("Is in progress: $it")
-            binding.progressBar.visibility = if(it) View.VISIBLE else View.GONE
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         }
     }
 
@@ -50,7 +51,15 @@ class PhotoBrowser : AppCompatActivity() {
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         adapter = PhotoItemAdapter()
-        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        val spanSize = resources.getInteger(R.integer.grid_column_count)
+        recyclerView.layoutManager = GridLayoutManager(this, spanSize)
+        recyclerView.addItemDecoration(
+            GridSpacingItemDecoration(
+                spanSize,
+                resources.getDimension(R.dimen.grid_item_spacing).toInt(),
+                true
+            )
+        )
         recyclerView.adapter = adapter
     }
 }
