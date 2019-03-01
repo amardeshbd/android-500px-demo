@@ -3,16 +3,20 @@ package com.hossainkhan.android.dpx.photodetails
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.snackbar.Snackbar
+import com.hossainkhan.android.dpx.Injection
 import com.hossainkhan.android.dpx.R
-import kotlinx.android.synthetic.main.activity_photo_details.*
+import com.hossainkhan.android.dpx.base.ViewModelFactory
+import com.hossainkhan.android.dpx.databinding.ActivityPhotoDetailsBinding
 import timber.log.Timber
 
 /**
  * Details activity for a selected Photo.
  */
-class PhotoDetailsActivity : AppCompatActivity() {
+class PhotoDetailsActivity : AppCompatActivity(), PhotoDetailsNavigator {
     companion object {
         const val INTENT_KEY_PHOTO_ID = "KEY_PHOTO_ID"
 
@@ -23,12 +27,23 @@ class PhotoDetailsActivity : AppCompatActivity() {
         }
     }
 
+    private lateinit var binding: ActivityPhotoDetailsBinding
+    private lateinit var viewModelFactory: ViewModelFactory
+    private lateinit var viewModel: PhotoDetailsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo_details)
-        setSupportActionBar(toolbar)
-        fab.setOnClickListener { view ->
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_photo_details)
+        binding.lifecycleOwner = this
+
+        viewModelFactory = Injection.provideViewModelFactory(photoDetailsNavigator = this)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(PhotoDetailsViewModel::class.java)
+
+
+        setSupportActionBar(binding.toolbar)
+        binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "TODO: Share Image", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
@@ -38,7 +53,7 @@ class PhotoDetailsActivity : AppCompatActivity() {
         val photoId = intent.getLongExtra(INTENT_KEY_PHOTO_ID, -1L)
         Timber.d("Found photo ID: $photoId")
         if(photoId == -1L) {
-            Snackbar.make(fab, "Photo ID Missing. Please select another photo.", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, "Photo ID Missing. Please select another photo.", Snackbar.LENGTH_LONG).show()
             return
         }
     }

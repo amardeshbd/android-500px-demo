@@ -17,7 +17,7 @@ import com.hossainkhan.android.dpx.photodetails.PhotoDetailsActivity
 import com.hossainkhan.android.dpx.ui.GridSpacingItemDecoration
 import timber.log.Timber
 
-class PhotoBrowser : AppCompatActivity(), PhotoBrowserNavigator {
+class PhotoBrowserActivity : AppCompatActivity(), PhotoBrowserNavigator {
 
     private lateinit var binding: ActivityPhotoBrowserBinding
     private lateinit var viewModelFactory: ViewModelFactory
@@ -29,7 +29,7 @@ class PhotoBrowser : AppCompatActivity(), PhotoBrowserNavigator {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_photo_browser)
         binding.lifecycleOwner = this
 
-        viewModelFactory = Injection.provideViewModelFactory(this)
+        viewModelFactory = Injection.provideViewModelFactory(photoBrowserNavigator = this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(PhotoBrowserViewModel::class.java)
 
         setupRecyclerView(binding.recyclerView)

@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".photobrowse.PhotoBrowser">
+        <activity android:name=".photobrowse.PhotoBrowserActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -23,11 +23,11 @@
         <activity
             android:name=".photodetails.PhotoDetailsActivity"
             android:label="@string/title_activity_photo_details"
-            android:parentActivityName=".photobrowse.PhotoBrowser"
+            android:parentActivityName=".photobrowse.PhotoBrowserActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.hossainkhan.android.dpx.photobrowse.PhotoBrowser" />
+                android:value="com.hossainkhan.android.dpx.photobrowse.PhotoBrowserActivity" />
         </activity>
     </application>
 
