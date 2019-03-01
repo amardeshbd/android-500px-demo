@@ -38,7 +38,8 @@ data class Photo(
     var id: Long,
     var name: String,
     @SerializedName("image_url")
-    var imageUrls: List<String>
+    var imageUrls: List<String>,
+    var user: User
 ) {
     val imageUrl: String?
         get() = imageUrls.firstOrNull()
