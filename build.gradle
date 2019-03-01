@@ -47,7 +47,7 @@ ext {
 
     // 3rd party library dependencies
     // --------------------------------------------------
-    timberLibraryVersion = '4.7.0' // https://github.com/JakeWharton/timber
+    timberLibraryVersion = '4.7.1' // https://github.com/JakeWharton/timber
     rxJavaVersion = '2.2.7' // https://github.com/ReactiveX/RxJava/releases
     rxAndroidVersion = '2.1.1' // https://github.com/ReactiveX/RxAndroid/releases
     retrofitVersion = '2.5.0' // https://square.github.io/retrofit/
