@@ -9,6 +9,7 @@ import com.hossainkhan.android.dpx.network.DpxApi
 import com.hossainkhan.android.dpx.network.models.Photos
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 
 class PhotoBrowserViewModel(private val api: DpxApi) : ViewModel() {
     // TODO - data binding not working with observable field.
@@ -28,4 +29,9 @@ class PhotoBrowserViewModel(private val api: DpxApi) : ViewModel() {
                     }.toFlowable()
             )
         }
+
+
+    fun onPhotoSelected(item: String) {
+        Timber.d("Selected photo with URL: $item")
+    }
 }

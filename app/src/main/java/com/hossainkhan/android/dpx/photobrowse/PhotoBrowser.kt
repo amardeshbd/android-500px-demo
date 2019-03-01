@@ -50,7 +50,7 @@ class PhotoBrowser : AppCompatActivity() {
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        adapter = PhotoItemAdapter()
+        adapter = PhotoItemAdapter(viewModel)
         val spanSize = resources.getInteger(R.integer.grid_column_count)
         recyclerView.layoutManager = GridLayoutManager(this, spanSize)
         recyclerView.addItemDecoration(
