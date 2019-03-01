@@ -36,6 +36,9 @@ android {
 def getLocalProperty(propertyKey) {
     // Creates a variable called localPropertiesFile, and initializes it to the local.properties file.
     def localPropertiesFile = rootProject.file("local.properties")
+    if (!localPropertiesFile.exists()) {
+        return "CI-SERVER - NO KEY"
+    }
 
     // Loads the local.properties file into the properties object.
     def properties = new Properties()
