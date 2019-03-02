@@ -1,6 +1,7 @@
 package com.hossainkhan.android.dpx.network.models
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 /**
@@ -44,5 +45,7 @@ data class User(
     var username: String,
     var firstname: String,
     var lastname: String,
-    var fullname: String
+    var fullname: String,
+    @SerializedName("userpic_https_url")
+    var userPicUrl: String
 ) : Parcelable

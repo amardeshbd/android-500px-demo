@@ -8,10 +8,31 @@
     tools:context=".photodetails.PhotoDetailsActivity"
     tools:showIn="@layout/activity_photo_details">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="Photo Details Goes Here" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/authorThumb"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/frozen_leaf_sample" />
+
+        <TextView
+            android:id="@+id/authorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="8dp"
+            style="@style/TextAppearance.AppCompat.Headline"
+            app:layout_constraintBottom_toBottomOf="@id/authorThumb"
+            app:layout_constraintLeft_toRightOf="@id/authorThumb"
+            app:layout_constraintTop_toTopOf="@id/authorThumb"
+            tools:text="Author Name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

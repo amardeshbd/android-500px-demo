@@ -12,7 +12,9 @@ import com.hossainkhan.android.dpx.R
 import com.hossainkhan.android.dpx.base.ViewModelFactory
 import com.hossainkhan.android.dpx.databinding.ActivityPhotoDetailsBinding
 import com.hossainkhan.android.dpx.network.models.Photo
+import com.hossainkhan.android.dpx.ui.RoundedCornersTransformation
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.content_photo_details.view.*
 import timber.log.Timber
 
 /**
@@ -60,7 +62,20 @@ class PhotoDetailsActivity : AppCompatActivity(), PhotoDetailsNavigator {
             return
         }
 
+        bindPhoto(photo)
+        bindUserInformation(photo)
+    }
+
+    private fun bindPhoto(photo: Photo) {
         binding.toolbar.title = photo.name
         Picasso.get().load(photo.imageUrl).into(binding.imageViewCollapsing)
+    }
+
+    private fun bindUserInformation(photo: Photo) {
+        binding.mainContent.authorName.text = photo.user.fullname
+        Picasso.get()
+            .load(photo.user.userPicUrl)
+            .transform(RoundedCornersTransformation(200, 20))
+            .into(binding.mainContent.authorThumb)
     }
 }
