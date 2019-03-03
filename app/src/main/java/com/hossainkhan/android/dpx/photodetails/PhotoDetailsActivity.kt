@@ -11,6 +11,10 @@ import com.hossainkhan.android.dpx.Injection
 import com.hossainkhan.android.dpx.R
 import com.hossainkhan.android.dpx.base.ViewModelFactory
 import com.hossainkhan.android.dpx.databinding.ActivityPhotoDetailsBinding
+import com.hossainkhan.android.dpx.network.models.Photo
+import com.hossainkhan.android.dpx.ui.RoundedCornersTransformation
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.content_photo_details.view.*
 import timber.log.Timber
 
 /**
@@ -18,11 +22,11 @@ import timber.log.Timber
  */
 class PhotoDetailsActivity : AppCompatActivity(), PhotoDetailsNavigator {
     companion object {
-        const val INTENT_KEY_PHOTO_ID = "KEY_PHOTO_ID"
+        const val INTENT_KEY_PHOTO_INFO = "KEY_PHOTO_INFO"
 
-        fun createStartIntent(context: Context, photoId: Long): Intent {
+        fun createStartIntent(context: Context, photo: Photo): Intent {
             val intent = Intent(context, PhotoDetailsActivity::class.java)
-            intent.putExtra(INTENT_KEY_PHOTO_ID, photoId)
+            intent.putExtra(INTENT_KEY_PHOTO_INFO, photo)
             return intent
         }
     }
@@ -42,6 +46,7 @@ class PhotoDetailsActivity : AppCompatActivity(), PhotoDetailsNavigator {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(PhotoDetailsViewModel::class.java)
 
 
+
         setSupportActionBar(binding.toolbar)
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "TODO: Share Image", Snackbar.LENGTH_LONG)
@@ -50,11 +55,29 @@ class PhotoDetailsActivity : AppCompatActivity(), PhotoDetailsNavigator {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
-        val photoId = intent.getLongExtra(INTENT_KEY_PHOTO_ID, -1L)
-        Timber.d("Found photo ID: $photoId")
-        if(photoId == -1L) {
+        val photo = intent.getParcelableExtra<Photo>(INTENT_KEY_PHOTO_INFO)
+        Timber.d("Found photo info: $photo")
+        if (photo == null) {
             Snackbar.make(binding.root, "Photo ID Missing. Please select another photo.", Snackbar.LENGTH_LONG).show()
             return
         }
+        binding.photoInfo = photo
+        bindPhoto(photo)
+        bindUserInformation(photo)
+    }
+
+    private fun bindPhoto(photo: Photo) {
+        supportActionBar?.title = photo.name
+        binding.toolbar.title = photo.name
+        // TODO - Use binding adapter
+        Picasso.get().load(photo.imageUrl).into(binding.imageViewCollapsing)
+    }
+
+    private fun bindUserInformation(photo: Photo) {
+        // TODO - Use binding adapter
+        Picasso.get()
+            .load(photo.user.userPicUrl)
+            .transform(RoundedCornersTransformation(200, 20))
+            .into(binding.mainContent.authorThumb)
     }
 }

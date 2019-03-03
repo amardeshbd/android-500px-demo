@@ -3,12 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.hossainkhan.android.dpx.photodetails.PhotoDetailsViewModel" />
+        <variable
+            name="photoInfo"
+            type="com.hossainkhan.android.dpx.network.models.Photo" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         tools:context=".photodetails.PhotoDetailsActivity">
 
+        <!--
+            TODO: Use aspect ratio for image instead of fixed height.
+            https://stackoverflow.com/questions/37098519/when-not-collapsed-some-part-of-the-the-toolbar-is-visible-over-the-imageview-of/37100655#37100655
+        -->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
@@ -42,19 +58,19 @@
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:visibility="visible"
-                    tools:visibility="visible" />
-
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include layout="@layout/content_photo_details" />
+
+        <!--
+            Use include ID, so that it can be used for data binding.
+            See https://medium.com/androiddevelopers/android-data-binding-that-include-thing-1c8791dd6038
+        -->
+        <include
+            android:id="@+id/mainContent"
+            layout="@layout/content_photo_details"
+            app:photoInfo="@{photoInfo}"
+            />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

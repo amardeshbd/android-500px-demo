@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">500px Gallery</string>
     <string name="title_activity_photo_details">Photo Details</string>
+
+    <!-- Labels -->
+    <string name="label_camera_model_name">Camera Model: %s</string>
+    <string name="label_camera_lens_name">Camera Lens: %s</string>
+    <string name="label_camera_aperture">Aperture: %s</string>
+    <string name="label_camera_shutter_speed">Shutter Speed: %s</string>
+
+    <string name="unavailable">Not available</string>
 </resources>

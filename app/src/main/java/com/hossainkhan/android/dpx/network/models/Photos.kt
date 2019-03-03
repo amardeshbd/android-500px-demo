@@ -1,6 +1,8 @@
 package com.hossainkhan.android.dpx.network.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 /**
  * Represents a photos API response.
@@ -53,12 +55,13 @@ import com.google.gson.annotations.SerializedName
  * }
  * ```
  */
+@Parcelize
 data class Photos(
     var feature: String,
     @SerializedName("total_pages")
     var totalPages: Int,
     var photos: List<Photo> = listOf()
-) {
+) : Parcelable {
     companion object {
         const val FEATURE_POPULAR = "popular"
         const val IMAGE_SIZE_600 = 600

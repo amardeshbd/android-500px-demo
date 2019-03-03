@@ -1,5 +1,9 @@
 package com.hossainkhan.android.dpx.network.models
 
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+
 /**
  * Model class for photo owner.
  *
@@ -35,11 +39,13 @@ package com.hossainkhan.android.dpx.network.models
  *     "userpic_url":"https://drscdn.500px.org/user_avatar/23896/q%3D85_w%3D300_h%3D300/v2?webp=true&v=5&sig=59d154366279e1d2f1c56677ed023371049bc8db96af1b397f95a8fb4d9f678c"
  *  }
  */
+@Parcelize
 data class User(
     var id: String,
     var username: String,
     var firstname: String,
     var lastname: String,
-    var fullname: String
-
-)
+    var fullname: String,
+    @SerializedName("userpic_https_url")
+    var userPicUrl: String
+) : Parcelable
