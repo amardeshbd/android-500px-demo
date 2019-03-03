@@ -68,7 +68,7 @@ class PhotoBrowserActivity : AppCompatActivity(), PhotoBrowserNavigator {
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder.setMessage(R.string.dialog_message_api_key_missing)
             .setTitle(R.string.dialog_title_api_key_missing)
-            .setPositiveButton(android.R.string.ok, null)
+            .setPositiveButton(android.R.string.ok) { _, _ -> finish() }
 
         val dialog: AlertDialog = builder.create()
         dialog.show()
