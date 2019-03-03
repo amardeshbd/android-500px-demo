@@ -7,6 +7,9 @@ import com.hossainkhan.android.dpx.databinding.ItemListPhotoBinding
 import com.hossainkhan.android.dpx.network.models.Photo
 import com.squareup.picasso.Picasso
 
+/**
+ * Adapter for 500px images.
+ */
 class PhotoItemAdapter(
     private val viewModel: PhotoBrowserViewModel
 ) :

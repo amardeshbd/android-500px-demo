@@ -19,11 +19,6 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         tools:context=".photodetails.PhotoDetailsActivity">
-
-        <!--
-            TODO: Use aspect ratio for image instead of fixed height.
-            https://stackoverflow.com/questions/37098519/when-not-collapsed-some-part-of-the-the-toolbar-is-visible-over-the-imageview-of/37100655#37100655
-        -->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"

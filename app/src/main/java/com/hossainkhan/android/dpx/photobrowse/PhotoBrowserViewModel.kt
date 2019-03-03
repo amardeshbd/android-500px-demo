@@ -14,7 +14,6 @@ import timber.log.Timber
 
 class PhotoBrowserViewModel(private val api: DpxApi,
                             private val navigator: PhotoBrowserNavigator) : ViewModel() {
-    // TODO - data binding not working with observable field.
     val isNetworkRequestInProgress = ObservableField(false)
 
     val photos: LiveData<List<Photo>>
