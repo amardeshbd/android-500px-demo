@@ -1,7 +1,7 @@
 package com.hossainkhan.android.dpx.photobrowse
 
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -12,11 +12,9 @@ import com.hossainkhan.android.dpx.Injection
 import com.hossainkhan.android.dpx.R
 import com.hossainkhan.android.dpx.base.ViewModelFactory
 import com.hossainkhan.android.dpx.databinding.ActivityPhotoBrowserBinding
-import com.hossainkhan.android.dpx.extensions.onChanged
 import com.hossainkhan.android.dpx.network.models.Photo
 import com.hossainkhan.android.dpx.photodetails.PhotoDetailsActivity
 import com.hossainkhan.android.dpx.ui.GridSpacingItemDecoration
-import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 
 class PhotoBrowserActivity : AppCompatActivity(), PhotoBrowserNavigator {
@@ -64,5 +62,15 @@ class PhotoBrowserActivity : AppCompatActivity(), PhotoBrowserNavigator {
 
     override fun openPhotoDetailsView(photo: Photo) {
         startActivity(PhotoDetailsActivity.createStartIntent(this, photo))
+    }
+
+    override fun showApiKeyMissingError() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setMessage(R.string.dialog_message_api_key_missing)
+            .setTitle(R.string.dialog_title_api_key_missing)
+            .setPositiveButton(android.R.string.ok, null)
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 }
