@@ -121,6 +121,8 @@ import kotlinx.android.parcel.Parcelize
 data class Photo(
     var id: Long,
     var name: String,
+    @SerializedName("url")
+    var websiteUrl: String,
     @SerializedName("image_url")
     var imageUrls: List<String>,
     var camera: String? = null,

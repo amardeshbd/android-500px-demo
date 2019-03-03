@@ -30,6 +30,7 @@ interface DpxApi {
      *
      * Example API: https://api.500px.com/v1/photos/4928401?comments
      *
+     * See [PhotoDetails] for server response issue.
      */
     @Deprecated(message = "Model class not working, see `PhotoDetails` for more info")
     @GET("/v1/photos/{photoId}")

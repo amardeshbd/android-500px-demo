@@ -2,6 +2,7 @@ package com.hossainkhan.android.dpx.photodetails
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -12,9 +13,6 @@ import com.hossainkhan.android.dpx.R
 import com.hossainkhan.android.dpx.base.ViewModelFactory
 import com.hossainkhan.android.dpx.databinding.ActivityPhotoDetailsBinding
 import com.hossainkhan.android.dpx.network.models.Photo
-import com.hossainkhan.android.dpx.ui.RoundedCornersTransformation
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.content_photo_details.view.*
 import timber.log.Timber
 
 /**
@@ -37,23 +35,8 @@ class PhotoDetailsActivity : AppCompatActivity(), PhotoDetailsNavigator {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_photo_details)
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_photo_details)
         binding.lifecycleOwner = this
-
-        viewModelFactory = Injection.provideViewModelFactory(photoDetailsNavigator = this)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(PhotoDetailsViewModel::class.java)
-
-
-
-        setSupportActionBar(binding.toolbar)
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "TODO: Share Image", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
 
         val photo = intent.getParcelableExtra<Photo>(INTENT_KEY_PHOTO_INFO)
         Timber.d("Found photo info: $photo")
@@ -61,23 +44,35 @@ class PhotoDetailsActivity : AppCompatActivity(), PhotoDetailsNavigator {
             Snackbar.make(binding.root, "Photo ID Missing. Please select another photo.", Snackbar.LENGTH_LONG).show()
             return
         }
+
+
+        viewModelFactory = Injection.provideViewModelFactory(photoDetailsNavigator = this)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(PhotoDetailsViewModel::class.java)
+
+
+        setupActionBar(photo)
+
+        // Finally binds everything related to photo
         binding.photoInfo = photo
-        bindPhoto(photo)
-        bindUserInformation(photo)
+        binding.viewModel = viewModel
     }
 
-    private fun bindPhoto(photo: Photo) {
+    private fun setupActionBar(photo: Photo) {
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        // Updates the photo title
         supportActionBar?.title = photo.name
         binding.toolbar.title = photo.name
-        // TODO - Use binding adapter
-        Picasso.get().load(photo.imageUrl).into(binding.imageViewCollapsing)
     }
 
-    private fun bindUserInformation(photo: Photo) {
-        // TODO - Use binding adapter
-        Picasso.get()
-            .load(photo.user.userPicUrl)
-            .transform(RoundedCornersTransformation(200, 20))
-            .into(binding.mainContent.authorThumb)
+    override fun onSharePhoto(photoUrl: String) {
+        val webpage: Uri = Uri.parse(photoUrl)
+        val intent = Intent(Intent.ACTION_VIEW, webpage)
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        } else {
+            Timber.w("User does not seem to have any browser or email client.")
+        }
     }
 }

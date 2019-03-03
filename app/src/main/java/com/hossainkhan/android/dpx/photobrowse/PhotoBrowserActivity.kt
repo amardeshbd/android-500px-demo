@@ -16,6 +16,7 @@ import com.hossainkhan.android.dpx.extensions.onChanged
 import com.hossainkhan.android.dpx.network.models.Photo
 import com.hossainkhan.android.dpx.photodetails.PhotoDetailsActivity
 import com.hossainkhan.android.dpx.ui.GridSpacingItemDecoration
+import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 
 class PhotoBrowserActivity : AppCompatActivity(), PhotoBrowserNavigator {
@@ -32,16 +33,11 @@ class PhotoBrowserActivity : AppCompatActivity(), PhotoBrowserNavigator {
 
         viewModelFactory = Injection.provideViewModelFactory(photoBrowserNavigator = this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(PhotoBrowserViewModel::class.java)
+        binding.viewModel = viewModel
 
         setupRecyclerView(binding.recyclerView)
 
         observePhotoUpdates()
-
-        viewModel.isNetworkRequestInProgress.onChanged {
-            // TODO - move this to data binding
-            Timber.d("Is in progress: $it")
-            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
-        }
     }
 
     private fun observePhotoUpdates() {
