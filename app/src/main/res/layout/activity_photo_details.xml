@@ -3,6 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.hossainkhan.android.dpx.photodetails.PhotoDetailsViewModel" />
+        <variable
+            name="photoInfo"
+            type="com.hossainkhan.android.dpx.network.models.Photo" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -54,7 +66,11 @@
             Use include ID, so that it can be used for data binding.
             See https://medium.com/androiddevelopers/android-data-binding-that-include-thing-1c8791dd6038
         -->
-        <include android:id="@+id/mainContent" layout="@layout/content_photo_details" />
+        <include
+            android:id="@+id/mainContent"
+            layout="@layout/content_photo_details"
+            app:photoInfo="@{photoInfo}"
+            />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

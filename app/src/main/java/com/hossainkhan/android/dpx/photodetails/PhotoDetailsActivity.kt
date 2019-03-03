@@ -61,18 +61,20 @@ class PhotoDetailsActivity : AppCompatActivity(), PhotoDetailsNavigator {
             Snackbar.make(binding.root, "Photo ID Missing. Please select another photo.", Snackbar.LENGTH_LONG).show()
             return
         }
-
+        binding.photoInfo = photo
         bindPhoto(photo)
         bindUserInformation(photo)
     }
 
     private fun bindPhoto(photo: Photo) {
+        supportActionBar?.title = photo.name
         binding.toolbar.title = photo.name
+        // TODO - Use binding adapter
         Picasso.get().load(photo.imageUrl).into(binding.imageViewCollapsing)
     }
 
     private fun bindUserInformation(photo: Photo) {
-        binding.mainContent.authorName.text = photo.user.fullname
+        // TODO - Use binding adapter
         Picasso.get()
             .load(photo.user.userPicUrl)
             .transform(RoundedCornersTransformation(200, 20))
