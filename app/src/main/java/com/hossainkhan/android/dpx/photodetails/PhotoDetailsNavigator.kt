@@ -1,3 +1,5 @@
 package com.hossainkhan.android.dpx.photodetails
 
-interface PhotoDetailsNavigator
+interface PhotoDetailsNavigator {
+    fun onSharePhoto(photoUrl: String)
+}
