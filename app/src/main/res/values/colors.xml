@@ -3,4 +3,5 @@
     <color name="colorPrimary">#78909c</color>
     <color name="colorPrimaryDark">#546e7a</color>
     <color name="colorAccent">#A8ABA0</color>
+    <color name="thumbsup_tint">#c25e00</color>
 </resources>
