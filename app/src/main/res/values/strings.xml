@@ -6,7 +6,12 @@
     <string name="label_camera_model_name">Camera Model: %s</string>
     <string name="label_camera_lens_name">Camera Lens: %s</string>
     <string name="label_camera_aperture">Aperture: %s</string>
-    <string name="label_camera_shutter_speed">Shutter Speed: %s</string>
+    <string name="label_camera_shutter_speed">Shutter Speed: %ss</string>
 
     <string name="unavailable">Not available</string>
+
+    <string name="dialog_title_api_key_missing">Missing API Key</string>
+    <string name="dialog_message_api_key_missing">Consumer API key is missing from `local.properties.`\n\n
+    Please set \'API_KEY\' property and re-build the app to browse photos.</string>
+
 </resources>

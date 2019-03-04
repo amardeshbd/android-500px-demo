@@ -12,9 +12,17 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
-class PhotoBrowserViewModel(private val api: DpxApi,
-                            private val navigator: PhotoBrowserNavigator) : ViewModel() {
+class PhotoBrowserViewModel(
+    private val api: DpxApi,
+    private val navigator: PhotoBrowserNavigator
+) : ViewModel() {
     val isNetworkRequestInProgress = ObservableField(false)
+
+    init {
+        if (BuildConfig.API_KEY.isNullOrEmpty() || BuildConfig.API_KEY == "null") {
+            navigator.showApiKeyMissingError()
+        }
+    }
 
     val photos: LiveData<List<Photo>>
         get() {
@@ -25,6 +33,7 @@ class PhotoBrowserViewModel(private val api: DpxApi,
                     .doOnSubscribe { isNetworkRequestInProgress.set(true) }
                     .doOnSuccess { isNetworkRequestInProgress.set(false) }
                     .doOnError { isNetworkRequestInProgress.set(false) }
+                    .onErrorReturnItem(Photos("", 0, listOf()))
                     .map { photos ->
                         photos.photos
                     }.toFlowable()

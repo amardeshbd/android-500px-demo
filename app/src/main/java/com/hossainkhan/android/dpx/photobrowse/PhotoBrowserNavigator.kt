@@ -7,4 +7,5 @@ import com.hossainkhan.android.dpx.network.models.Photo
  */
 interface PhotoBrowserNavigator {
     fun openPhotoDetailsView(photo: Photo)
+    fun showApiKeyMissingError()
 }
