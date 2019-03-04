@@ -6,7 +6,7 @@
     <string name="label_camera_model_name">Camera Model: %s</string>
     <string name="label_camera_lens_name">Camera Lens: %s</string>
     <string name="label_camera_aperture">Aperture: %s</string>
-    <string name="label_camera_shutter_speed">Shutter Speed: %s</string>
+    <string name="label_camera_shutter_speed">Shutter Speed: %ss</string>
 
     <string name="unavailable">Not available</string>
 
